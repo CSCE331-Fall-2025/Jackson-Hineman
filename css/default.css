@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    overflow-x: hidden;
+
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+a {
+    color: #3b86ff
+}
+
+nav {
+    position: fixed;
+    background: linear-gradient(
+        to bottom,
+        #000000FF 0%,
+        #000000FF 63%,
+        #ffffff00 100%
+    );
+    width: 100%;
+    padding: 0px;
+    z-index: 10;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: left;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 25px 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav ul li:first-child a {
+    font-weight: bold;
+}
+
+.hero-wrapper {
+    overflow: hidden;
+    background: url("../images/void.gif") repeat center center;
+}
+
+.hero {
+    position: relative;
+    height: 75vh;
+    width: 100%;
+    background: url("../images/flappy.png") no-repeat center center;
+    background-size: cover;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease;
+}
+
+.hero-text {
+    display: block;
+    color: white;
+    font-weight: 250;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+        to top,
+        #FFFFFFFF 0%,
+        #FFFFFFE6 1%,
+        #FFFFFF44 2%,
+        #FFFFFF00 13%
+    );
+
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    bottom: 12.3vh;
+}
+
+.hero-text p {
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 72px;
+
+    transform: translate(40px, 40px);
+}
+
+#about {
+    position: absolute;
+    border-radius: 16px;
+    color: white;
+    border: white;
+    display: inline-block;
+    padding: 0px 15px;
+    margin-top: -12px;
+    left: 5vw;
+    max-width: 25vw;
+    border: 1px solid white;
+}
+
+#contact {
+    position: absolute;
+    border-radius: 16px;
+    color: white;
+    border: white;
+    display: inline-block;
+    padding: 0px 15px;
+    border: 1px solid white;
+    max-width: 25vw;
+    margin-top: -12px;
+    left: 42vw;
+}
+
+
+#highlights {
+    position: absolute;
+    border-radius: 16px;
+    color: white;
+    border: white;
+    display: inline-block;
+    padding: 0px 15px;
+    margin-top: -12px;
+    right: 5vw;
+    max-width: 25vw;
+    border: 1px solid white;
+}
+
+#heading {
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 52px;
+    margin-left: 35px;
+    font-weight: 250;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
