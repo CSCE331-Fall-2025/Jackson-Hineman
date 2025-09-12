@@ -3,6 +3,7 @@
 <head>
   <meta charset="iso-8859-1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/subpages.css">
   <title>Projects</title>
 </head>
 <body>
@@ -17,38 +18,39 @@
     </ul>
   </nav>
 
-  <section id="projects">
+  <main>
+    <section id="projects">
+      <div class="projects-header">
+        <p>Projects<p>
+      </div>
 
-    <div class="project">
-      <div class="project-visual">
-        <p>[Project 1 visual]</p>
+      <div class="project">
+        <div id="project1" class="project-visual"></div>
+        <div class="project-description">
+          <h2>Flappy Bird ML</h2>
+          <p>This is my first attempt at a <a href="https://en.wikipedia.org/wiki/Neural_network_(machine_learning)">Neural Network</a> based machine learning algorithm. <a href="https://en.wikipedia.org/wiki/Flappy_Bird">Flappy Bird</a> is a game where the controlled character is a bird that falls continuously unless a jump input is received, at which point it will briefly jump up a small distance. The goal is to keep it afloat by repeatedly jumping, while avoiding obstacles that scroll across the screen horizontally. The Neural Network simulates hundreds of birds simultaneously playing this game, taking in various inputs concerning the game state such as the height of the bird, the height of the gap between obstacles, or the horizontal distance to the next obstacle. Matrices of weights and biases are used to calculate whether or not the bird should jump on a given frame. The bird that makes it the farthest has its weights and biases used as the seed for the next generation. After a few generations, the birds will survive a long time. After a few more, they will survive forever.</p>
+        </div>
       </div>
-      <div class="project-description">
-        <h2>Project Title 1</h2>
-        <p>[description]</p>
-      </div>
-    </div>
 
-    <div class="project">
-      <div class="project-visual">
-        <p>[Project 2 visual]</p>
+      <div class="project">
+        <div id="project2" class="project-visual"></div>
+        <div class="project-description">
+          <h2>Infinite Game of Life</h2>
+          <p><a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a> is a cellular automata program which simulates natural selection.  In this "zero player game" as Conway described it, cells are given an initial state, or seed, and then the rules following are applied over and over, for a mathematically undecidable amount of time in most cases. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+Any live cell with two or three live neighbours lives on to the next generation.
+Any live cell with more than three live neighbours dies, as if by overpopulation.
+Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction. <br><br> In this implementation, initial state is drawn by hand and the grid is infinite and can be traversed via a camera. It is written using the pygame library with rendering and camera logic made from scratch. By only storing live cells and using constant lookup time data structures, you can achieve this infinite grid without any loss of performance, even in Python.</p>
+        </div>
       </div>
-      <div class="project-description">
-        <h2>Project Title 2</h2>
-        <p>[description]</p>
+      <div class="project">
+        <div id="project3" class="project-visual"></div>
+        <div class="project-description">
+          <h2>Image to ASCII/Pixel Art</h2>
+          <p>Program which converts images to (customizably) <a href="https://en.wikipedia.org/wiki/ASCII_art">ASCII art</a> or pixel art. Uses grayscale value of pixel color to map to a character which appears similarly bright in monospace font. End result is even photorealistic imagery being represented well as text, and even better when the character set is solid box characters taken from unicode. This program can be quite fun to mess around with, but often ends up producing images that are quite large (because one pixel maps to a character containing several pixels) and therefore hard to view on poor hardware. <br><br><br>The image to the left is not grayscaled, it is a compressed image constructed by the program using millions and millions of unicode characters.<br><br><br><br><br></p>
+        </div>
       </div>
-    </div>
-    <div class="project">
-      <div class="project-visual">
-        <p>[etc.]</p>
-      </div>
-      <div class="project-description">
-        <h2>etc.</h2>
-        <p>[etc.]</p>
-      </div>
-    </div>
 
-  </section>
-
+    </section>
+  </main>
 </body>
 </html>

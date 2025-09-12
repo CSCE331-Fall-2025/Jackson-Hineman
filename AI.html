@@ -3,6 +3,7 @@
 <head>
   <meta charset="iso-8859-1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/subpages.css">
   <title>AI</title>
 </head>
 <body>
@@ -15,10 +16,221 @@
       <li><a href="AI.html">AI</a></li>
     </ul>
   </nav>
-  <section id="AI">
-    <div class="AI">
-    	<p>AI app goes here, whatever it decides to make.</p>
-      </div>
+  
+  <main>
+    <section id="projects">
+      <div class="projects-header">
+        <p>AI<p>
+        </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>This is a very simple webpage example. It has a header, navigation bar, main content area, and a footer.</p>
     </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <p>Here you could list some projects, ideas, or examples of your work.</p>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>If you want to get in touch, you could put contact info here.</p>
+    </section>
+
+    <!-- Minesweeper App -->
+  <section id="minesweeper">
+    <h2>Minesweeper</h2>
+    <div>
+      <button id="restart-btn" type="button">Restart</button>
+      <span id="status" aria-live="polite" style="margin-left:12px;"></span>
+    </div>
+    <div id="minesweeper-board" style="margin-top:12px;"></div>
+
+    <script>
+      const rows = 8;
+      const cols = 8;
+      const minesCount = 10;
+      let board = [];
+      let revealed = [];
+      let flags = [];
+
+      function initBoard() {
+        board = Array.from({ length: rows }, () => Array(cols).fill(0));
+        revealed = Array.from({ length: rows }, () => Array(cols).fill(false));
+        flags = Array.from({ length: rows }, () => Array(cols).fill(false));
+        document.getElementById('status').textContent = '';
+
+        // place mines
+        let placed = 0;
+        while (placed < minesCount) {
+          const r = Math.floor(Math.random() * rows);
+          const c = Math.floor(Math.random() * cols);
+          if (board[r][c] !== 'M') {
+            board[r][c] = 'M';
+            placed++;
+            updateNeighbors(r, c);
+          }
+        }
+
+        renderBoard();
+      }
+
+      function updateNeighbors(r, c) {
+        for (let dr = -1; dr <= 1; dr++) {
+          for (let dc = -1; dc <= 1; dc++) {
+            const nr = r + dr, nc = c + dc;
+            if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && board[nr][nc] !== 'M') {
+              board[nr][nc]++;
+            }
+          }
+        }
+      }
+
+      function renderBoard() {
+        const container = document.getElementById("minesweeper-board");
+        container.innerHTML = "";
+        for (let r = 0; r < rows; r++) {
+          const rowDiv = document.createElement("div");
+          rowDiv.style.lineHeight = '0';
+          for (let c = 0; c < cols; c++) {
+            const cell = document.createElement("button");
+
+            Object.assign(cell.style, {
+              width: "34px",
+              height: "34px",
+              margin: "2px",
+              padding: "0",
+              fontWeight: "700",
+              fontSize: "16px",
+              lineHeight: "34px",
+              textAlign: "center",
+              borderRadius: "4px",
+              border: "1px solid #444",
+              backgroundColor: "#111", /* dark unrevealed background */
+              color: "#fff",
+              cursor: "pointer",
+              boxSizing: "border-box"
+            });
+
+            cell.dataset.row = r;
+            cell.dataset.col = c;
+
+            cell.addEventListener("click", () => {
+              if (flags[r][c] || revealed[r][c]) return;
+              reveal(r, c);
+            });
+
+            cell.addEventListener("contextmenu", (e) => {
+              e.preventDefault();
+              if (revealed[r][c]) return;
+              flags[r][c] = !flags[r][c];
+              renderBoard();
+            });
+
+            if (revealed[r][c]) {
+              cell.disabled = true;
+              cell.style.backgroundColor = "#eaeaea"; /* light revealed background */
+              cell.style.border = "1px solid #bbb";
+              if (board[r][c] === "M") {
+                cell.textContent = "B"; /* bomb marker (no emoji) */
+                cell.style.color = "#b00000";
+              } else if (board[r][c] > 0) {
+                cell.textContent = board[r][c];
+                const colors = {
+                  1: "#0b5cff",
+                  2: "#238f00",
+                  3: "#ff1717",
+                  4: "#000080",
+                  5: "#800000",
+                  6: "#008080",
+                  7: "#000000",
+                  8: "#808080"
+                };
+                cell.style.color = colors[board[r][c]] || "#000";
+              } else {
+                cell.textContent = "";
+              }
+            } else if (flags[r][c]) {
+              cell.textContent = "F"; /* flag marker (no emoji) */
+              cell.style.color = "#ffcc00";
+            }
+
+            rowDiv.appendChild(cell);
+          }
+          container.appendChild(rowDiv);
+        }
+      }
+
+      function reveal(r, c) {
+        if (r < 0 || r >= rows || c < 0 || c >= cols) return;
+        if (revealed[r][c] || flags[r][c]) return;
+
+        revealed[r][c] = true;
+
+        if (board[r][c] === "M") {
+          // reveal all mines
+          for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+              if (board[i][j] === "M") revealed[i][j] = true;
+            }
+          }
+          renderBoard();
+          document.getElementById('status').textContent = 'Game Over';
+          return;
+        }
+
+        if (board[r][c] === 0) {
+          for (let dr = -1; dr <= 1; dr++) {
+            for (let dc = -1; dc <= 1; dc++) {
+              const nr = r + dr, nc = c + dc;
+              if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && !revealed[nr][nc]) {
+                reveal(nr, nc);
+              }
+            }
+          }
+        }
+
+        renderBoard();
+
+        if (checkWin()) {
+          document.getElementById('status').textContent = 'You win';
+          // reveal any remaining mines for clarity
+          for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+              if (board[i][j] === "M") revealed[i][j] = true;
+            }
+          }
+          renderBoard();
+        }
+      }
+
+      function checkWin() {
+        let revealedCount = 0;
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (revealed[r][c] && board[r][c] !== "M") revealedCount++;
+          }
+        }
+        return revealedCount === (rows * cols - minesCount);
+      }
+
+      document.getElementById('restart-btn').addEventListener('click', initBoard);
+
+      initBoard();
+    </script>
+  </section>
+
+  <section id="extra-box">
+    <h2>Prompts</h2>
+    <div id="custom-box">
+      <p>
+        Prompt 1: "make a webpage, do whatever you want with it, relatively simple and short." <br>
+        Prompt 2: "Add a minesweeper app at the bottom. Include the JS in the html." <br> 
+        Prompt 3: "it functions but you cant see the numbers that you would use to work out where the bombs are" <br>
+        Prompt 4: "Now add a text box below that, just an empty one that I can put something in" <br>
+      </p>
+    </div>
+  </section>
+
+  </main>
 </body>
 </html>
