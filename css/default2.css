@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background: url("../images/void.gif") repeat center center;
     overflow-x: hidden;
 
     text-decoration: none;
@@ -33,7 +33,6 @@ nav ul {
     display: flex;
     justify-content: left;
 }
-
 nav ul li a {
     display: block;
     color: white;
@@ -91,6 +90,10 @@ nav ul li:first-child a {
     transform: translate(40px, 40px);
 }
 
+.more {
+    perspective:500px;
+}
+
 #about {
     position: absolute;
     border-radius: 16px;
@@ -102,6 +105,7 @@ nav ul li:first-child a {
     left: 5vw;
     max-width: 25vw;
     border: 1px solid white;
+    animation: floaty 12s linear infinite;
 }
 
 #contact {
@@ -115,6 +119,7 @@ nav ul li:first-child a {
     max-width: 25vw;
     margin-top: -12px;
     left: 42vw;
+    animation: floaty 12s linear infinite;
 }
 
 
@@ -129,6 +134,7 @@ nav ul li:first-child a {
     right: 5vw;
     max-width: 25vw;
     border: 1px solid white;
+    animation: floaty 12s linear infinite;
 }
 
 #heading {
@@ -139,15 +145,18 @@ nav ul li:first-child a {
     font-weight: 250;
     text-decoration: underline;
     text-decoration-thickness: 2px;
+    animation: floaty 23s linear infinite;
+
 }
 
 #styleSwitch {
-    background: url("../images/btn1.png") no-repeat center center;
+    background: url("../images/btn2.png") no-repeat center center;
     width: 0.001px;
     height: 0.001px;
     margin-top: 5px;
     background-size: contain;
 }
+
 
 main {
     position: relative;
@@ -170,6 +179,9 @@ main {
     width: 100%;
     padding-left: 50px;
     font-size: 72px;
+    perspective: 750px;
+    animation: floaty 12s linear infinite;
+    transform-style: preserve-3d;
 }
 
 .project {
@@ -179,6 +191,7 @@ main {
     margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
+    perspective: 1000px;
 }
 
 .project-visual {
@@ -187,6 +200,9 @@ main {
     width: 75%;
     background: url("../images/placeholder.png") no-repeat center center;
     margin-right: 15px;
+    perspective: 750px;
+    animation: floaty 12s linear infinite;
+    transform-style: preserve-3d;
 }
 
 .project-description {
@@ -197,6 +213,9 @@ main {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
+    animation: floaty 12s linear infinite;
+    transform-style: preserve-3d;
+    perspective: 750px;
 }
 
 .project-description p {
@@ -238,18 +257,21 @@ main {
   align-items: start;
   justify-content: center;
   padding: 0px 40px;
+  perspective: 500px;
 }
 
 .qual-resume {
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: floaty 12s linear infinite;
 }
 
 .qual-resume h2 {
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  animation: floaty 12s linear infinite;
 }
 
 .qual-notes-left,
@@ -258,6 +280,7 @@ main {
   padding: 15px;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.05);
+  animation: floaty 12s linear infinite;
 }
 
 .qual-notes-left h2,
@@ -266,4 +289,27 @@ main {
   font-size: 1.2rem;
   border-bottom: 1px solid #fff;
   padding-bottom: 5px;
+  animation: floaty 12s linear infinite;
+
+}
+
+.drifter-box {
+    display: contents;  
+    animation: drift 6s ease-out forwards;
+    --drift-x: 50px;
+    --drift-y: 0px;
+}
+
+
+@keyframes floaty {
+  0%   { transform: rotateX(1.5deg) rotateY(1.5deg) rotateZ(0deg) translateY(0) translateZ(0); }
+  25%  { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-8px) translateZ(5px); }
+  50%  { transform: rotateX(-1.5deg) rotateY(-1.5deg) rotateZ(0deg) translateY(0) translateZ(0); }
+  75%  { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(8px) translateZ(-5px); }
+  100% { transform: rotateX(1.5deg) rotateY(1.5deg) rotateZ(0deg) translateY(0) translateZ(0); }
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(20px, 20); }
 }
